@@ -1,0 +1,24 @@
+# Node.js
+node_modules/
+dist/
+.env
+.env.development
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Mac/Linux
+.DS_Store
+
+# Serverless Framework
+.serverless/
+
+# esbuild cache (if used)
+.esbuild/
+
+# VSCode
+.vscode/
+
+.env
