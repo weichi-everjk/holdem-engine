@@ -1,6 +1,6 @@
 import type { Card } from "../cards/Card";
 import { Deck } from "../cards/Deck";
-import { PlayerId } from "./types/types";
+import { PlayerId } from "../players/types/types";
 
 export class Dealer {
   private readonly deck: Deck;
