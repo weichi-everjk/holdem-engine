@@ -2,13 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { HandState } from "../HandState";
 import { Card } from "../../cards/Card";
-import { Player } from "src/domain/players/Playter";
-
-const makePlayers = (n: number) =>
-  Array.from(
-    { length: n },
-    (_, i) => new Player({ id: `p${i + 1}`, stack: 1000 }),
-  );
+import { makePlayers } from "../helper/helper";
 
 test("constructor sets initial hand state", () => {
   const players = makePlayers(4);
