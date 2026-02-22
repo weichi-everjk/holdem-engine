@@ -20,6 +20,9 @@ export class HandState {
 
   private _toActIndex = 0;
 
+  private _actedThisStreet = new Set<string>();
+  private _lastAggressorIndex = 0;
+
   constructor(params: {
     handId: string;
     players: Player[];
@@ -89,6 +92,38 @@ export class HandState {
     const n = this.players.length;
     if (n === 2) return mod(this.dealerIndex + 1, n);
     return mod(this.dealerIndex + 2, n);
+  }
+
+  get bigBlindAmount(): number {
+    return this.bigBlind;
+  }
+
+  get lastAggressorIndex(): number {
+    return this._lastAggressorIndex;
+  }
+
+  setLastAggressorIndex(i: number): void {
+    if (!Number.isInteger(i) || i < 0 || i >= this.players.length) {
+      throw new Error("Invalid lastAggressorIndex");
+    }
+    this._lastAggressorIndex = i;
+  }
+
+  markActed(playerId: string): void {
+    this._actedThisStreet.add(playerId);
+  }
+
+  hasActed(playerId: string): boolean {
+    return this._actedThisStreet.has(playerId);
+  }
+
+  resetStreetState(): void {
+    this._actedThisStreet.clear();
+    this.setBettingState({ currentBet: 0, minRaise: this.bigBlind });
+  }
+
+  resetActedThisStreet(): void {
+    this._actedThisStreet.clear();
   }
 
   addCommunityCards(cards: Card[]): void {
